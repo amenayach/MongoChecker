@@ -41,6 +41,8 @@
 
                 var data = collection.Find(filter).ToList();
 
+                Console.WriteLine($"Count: {data.Count()}");
+
                 var jobjectList = data
                     .Select(m => Newtonsoft.Json.JsonConvert.SerializeObject(BsonTypeMapper.MapToDotNetValue(m)))
                     .Select(m => JObject.Parse(m.ToString()));
@@ -49,7 +51,6 @@
 
                 Console.WriteLine(jsonArray.ToString());
 
-                Console.WriteLine($"Count: {data.Count()}");
                 Console.WriteLine();
             }
             catch (Exception ex)
