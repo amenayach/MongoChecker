@@ -40,8 +40,6 @@
                 var collection = mongoService.GetCollection<BsonDocument>(collectionName);
 
                 var data = collection.Find(filter).ToList();
-                //var dotnetData = data.ConvertAll(BsonTypeMapper.MapToDotNetValue);
-                //Console.WriteLine(dotnetData);
 
                 var jobjectList = data
                     .Select(m => Newtonsoft.Json.JsonConvert.SerializeObject(BsonTypeMapper.MapToDotNetValue(m)))
@@ -50,15 +48,6 @@
                 var jsonArray = new JArray(jobjectList);
 
                 Console.WriteLine(jsonArray.ToString());
-
-                //if (data.Any())
-                //{
-                //    Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(BsonTypeMapper.MapToDotNetValue(data.First())));
-                //}
-
-                //var jsonWriterSettings = new JsonWriterSettings { OutputMode = JsonOutputMode.Strict };
-                //JObject json = JObject.Parse(data.ToJson(jsonWriterSettings));
-                //Console.WriteLine(json.ToString());
 
                 Console.WriteLine($"Count: {data.Count()}");
                 Console.WriteLine();
